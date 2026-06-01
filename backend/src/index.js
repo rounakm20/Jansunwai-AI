@@ -13,6 +13,7 @@ const allowedOrigins = [
   /\.vercel\.app$/,
   /\.railway\.app$/,
   /\.netlify\.app$/,
+  /\.onrender\.com$/,   // ← added for Render deployment
 ];
 
 app.use(cors({
