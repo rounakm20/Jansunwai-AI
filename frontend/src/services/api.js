@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+const API_BASE = "https://jansunwai-ai.onrender.com";
 
 export async function createComplaint(title, description, location, preferred_language = "en", image_data = null) {
   const response = await fetch(`${API_BASE}/complaints`, {
