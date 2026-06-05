@@ -6,7 +6,7 @@ export default function SubmitComplaint() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
-  const [lang, setLang] = useState("hi"); // Hindi preferred as default or en
+  const [lang, setLang] = useState("hi");
   const [isRecording, setIsRecording] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState(null);
@@ -37,7 +37,6 @@ export default function SubmitComplaint() {
     setImagePreview(null);
   };
 
-  // Initialize Speech Recognition
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
@@ -64,7 +63,6 @@ export default function SubmitComplaint() {
     }
   }, [lang]);
 
-  // Toggle Voice Input
   const toggleRecording = () => {
     if (!recognition) {
       alert("Speech recognition is not supported in this browser. Please use Google Chrome or Microsoft Edge.");
@@ -79,9 +77,8 @@ export default function SubmitComplaint() {
     }
   };
 
-  // Run dynamic category prediction simulation on client based on content
   useEffect(() => {
-    const text = (title + " " + description).lowerCase? (title + " " + description).toLowerCase() : "";
+    const text = (title + " " + description).toLowerCase();
     if (text.length < 5) {
       setPredictedCat(null);
       return;
@@ -259,7 +256,6 @@ export default function SubmitComplaint() {
 
   return (
     <div className="max-w-2xl mx-auto mt-6 bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 animate-slide-up">
-      {/* Decorative Tricolor Accent */}
       <div className="h-1.5 w-full bg-gradient-to-r from-orange-500 via-white to-green-600" />
       
       <div className="px-8 py-6 bg-slate-50/60 border-b border-slate-100">
@@ -383,7 +379,7 @@ export default function SubmitComplaint() {
           </div>
         </div>
 
-        {/* Image Attachment Selector */}
+        {/* Image Attachment */}
         <div className="space-y-2">
           <label className="text-sm font-semibold text-slate-700 block">
             Attach Supporting Image / फ़ोटो संलग्न करें (Optional)
@@ -406,19 +402,19 @@ export default function SubmitComplaint() {
               />
             </div>
           ) : (
-            <div className="relative rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 p-2.5 flex items-center space-x-4">
-              <img src={imagePreview} alt="Attached Preview" className="w-16 h-16 object-cover rounded-xl border border-slate-200 shrink-0" />
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold text-slate-700 truncate">Supporting_Evidence.png</p>
-                <p className="text-[10px] text-slate-400">Image loaded successfully (ready to upload)</p>
-              </div>
+            <div className="relative rounded-2xl border border-slate-200 overflow-hidden bg-slate-50">
+              <img
+                src={imagePreview}
+                alt="Attached Preview"
+                className="w-full max-h-48 object-cover rounded-xl"
+              />
               <button
                 type="button"
                 onClick={removeImage}
-                className="p-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl transition-all mr-2 shrink-0 animate-scale-in"
+                className="absolute top-2 right-2 p-1.5 bg-red-500 hover:bg-red-600 text-white rounded-full transition-all shadow-md"
                 title="Remove photo"
               >
-                <X className="w-4.5 h-4.5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
           )}
